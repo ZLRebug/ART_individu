@@ -1,0 +1,45 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "La chienne a L'individu ",
+    LoadingTitle = "BOUHAHAHAHAHAHAHAHAHA",
+    LoadingSubtitle = "by l'individu",
+    ConfigurationSaving = {
+       Enabled = false,
+       FolderName = nil, 
+       FileName = "ART HUB"
+    },
+    Discord = {
+       Enabled = true,
+       Invite = "9AS9r9SY", 
+       RememberJoins = true 
+    },
+ })
+
+--[[------------------------------
+    Teleporter
+--------------------------------]]
+
+local TeleportTab = Window:CreateTab("Teleport", nil) 
+local MiscSection = TeleportTab:CreateSection("")
+
+local Button = TeleportTab:CreateButton({
+    Name = "Pvp",
+    Callback = function(Option)
+        
+        local interactionsModel = game.Workspace:FindFirstChild("Interactions")
+        
+        if interactionsModel then
+            
+            local summonLocation = interactionsModel:FindFirstChild("PVPElevator")
+
+            if summonLocation then
+                game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(summonLocation.CFrame)
+            else
+                warn("")
+            end
+        else
+            warn("")
+        end
+    end,
+})
