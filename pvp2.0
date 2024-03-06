@@ -1,0 +1,88 @@
+local scriptExecuted = false  -- Variable pour garder une trace de l'état d'exécution du script
+
+while true do
+    if _G.auto_execute and not scriptExecuted then
+        -- Mettre ici l'intégralité du code que tu veux exécuter lorsque auto_execute est vrai
+        
+        local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "La chienne a L'individu ",
+    LoadingTitle = "BOUHAHAHAHAHAHAHAHAHA",
+    LoadingSubtitle = "by l'individu",
+    ConfigurationSaving = {
+       Enabled = false,
+       FolderName = nil, 
+       FileName = "ART HUB"
+    },
+    Discord = {
+       Enabled = true,
+       Invite = "9AS9r9SY", 
+       RememberJoins = true 
+    },
+ })
+
+--[[------------------------------
+    Main
+--------------------------------]]
+
+local MainTab = Window:CreateTab("Mains", nil) 
+local MiscSection = MainTab:CreateSection("")
+
+local Button = MainTab:CreateButton({
+    Name = "Pvp",
+    Callback = function(Option)
+        
+        local interactionsModel = game.Workspace:FindFirstChild("Interactions")
+        
+        if interactionsModel then
+            
+            local summonLocation = interactionsModel:FindFirstChild("PVPElevator")
+
+            if summonLocation then
+                game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(summonLocation.CFrame)
+            else
+                warn("")
+            end
+        else
+            warn("")
+        end
+    end,
+})
+
+local Toggle = MainTab:CreateToggle({
+    Name = "Join 1v1",
+    CurrentValue = false,
+    Flag = "1v1", 
+    Callback = function(Value)
+        if Value then
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunction"):InvokeServer("Join1v1")
+        end
+    end,
+})
+
+function Toggle:SetActive(Value)
+    self.CurrentValue = Value
+    self.ToggleButton:SetActive(self.CurrentValue)
+    if self.Callback then
+        self.Callback(Value)
+    end
+end
+
+local Toggle = MainTab:CreateToggle({
+    Name = "Auto Extreme",
+    CurrentValue = false,
+    Flag = "Extreme", 
+    Callback = function(Value)
+        if Value then
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Input"):FireServer("VoteGameMode", "Extreme")
+        end
+    end,
+})        
+        
+        scriptExecuted = true  -- Marquer le script comme étant exécuté
+    elseif not _G.auto_execute then
+        scriptExecuted = false  -- Réinitialiser l'état d'exécution du script lorsque auto_execute est faux
+    end
+    wait(1)  -- Attendre une seconde avant de vérifier à nouveau
+end
