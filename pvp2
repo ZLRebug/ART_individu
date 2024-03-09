@@ -9,13 +9,12 @@ iRay  | Programming
 ]]
 
 
-
 local Release = "Beta 8"
 local NotificationDuration = 6.5
 local RayfieldFolder = "Rayfield"
-local ConfigurationFolder = RayfieldFolder.."/Configurations"
+local PlayerId = game.Players.LocalPlayer.UserId -- Récupérer l'ID du joueur
+local ConfigurationFolder = RayfieldFolder .. "/ASTD ART/" .. PlayerId .. "/"
 local ConfigurationExtension = ".json"
-
 
 
 local RayfieldLibrary = {
